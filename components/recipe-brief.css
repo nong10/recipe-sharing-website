@@ -1,0 +1,36 @@
+.recipe-brief {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  background: #FFFEFF;
+}
+
+.recipe-brief-left {
+  width: 67%;
+  padding: 10px;
+}
+
+.recipe-brief-right {
+  width: 33%;
+}
+
+.recipe-brief-left p .tag {
+  color: #007ede;
+  background: #f4f4f4;
+  border-width: 1px;
+  border-style: solid;
+  border-color:#007ede;
+  border-radius: 3px;
+  padding: 0 2px 0 2px;
+}
+
+.recipe-brief-left a h3,
+.recipe-brief-left p {
+  margin: 0;
+}
+
+.recipe-brief-right img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+}

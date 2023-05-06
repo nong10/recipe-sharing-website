@@ -1,4 +1,5 @@
-# Files Structure
+# General
+## Files Structure
 ```
 components/
   - recipe-brief.php
@@ -16,11 +17,12 @@ signup.php
 profile.php
 recipe-details.php
 ```
-# Constrains
+## Constrains
 - Without logged in, it is impossible to access login-specific pages and will be redirected to login page:
   - create-recipe.php
   - 
 
+# Pages
 ## navbar.php
 - this navigation bar is displayed on top of every page
 - Includes the necessary CSS file.
@@ -122,7 +124,7 @@ If there are any errors in the input, the error message is displayed in red.
 If the password is successfully changed, a success message is displayed in green 
 and a button to return to the home page is shown.
 
-## Database
+# Database
 - Credential of database: username: `gpt`, password: `gpt`
 - Database: `testwebsite1`
 - Table: 
@@ -130,53 +132,55 @@ and a button to return to the home page is shown.
     - Columns: `user_id`, `username`, `password`
   - `recipes`
     - Columns: `recipe_id`,`dishname`,`description`,`ingredients`,`steps`,`image`,`tag`
-	- image contains the filename of image
-	- description, ingredients, descriptions all have upper limit of 2000 characters.
-	- ingredients are stored in such format: [{one tsp salt},{two eggs},{1kg flour}]
-	- steps are stored in such format: [{step one},{step two},{step three}]
-	- tag is a number, refer to tags table for more details
+      - image contains the filename of image
+      - description, ingredients, descriptions all have upper limit of 2000 characters.
+      - ingredients are stored in such format: `[{one tsp salt},{two eggs},{1kg flour}]`
+      - steps are stored in such format: `[{step one},{step two},{step three}]`
+      - tag is a number, refer to tags table for more details
   - `owns_recipes`
     - Columns: `owns_recipes_id`, `user_id`, `recipe_id` 
   - `saves_recipes`
     - Columns: `saves_recipes_id`, `user_id`, `recipe_id` 
   - `tags`
     - Columns: `tag_id`, `mask_value`, `mask_name`
-	- Mask: Each tag is assigned a unique bit in the binary representation. 
-	        in recipes.tag, 1 in the corresponding bit in the binary mask indicate the recipe has this tag.
-			Ex: mask for a: 010, mask for b:001 tag value: 011. The recipe has both tag a and b.
-	- tags:
-      - Chinese: 		00000000000000000000000000000001, 1
-      - Italian: 		00000000000000000000000000000010, 2
-      - French: 		00000000000000000000000000000100, 4
-      - Mexican: 		00000000000000000000000000001000, 8
-      - Japanese: 	  00000000000000000000000000010000, 16
-      - Indian: 		00000000000000000000000000100000, 32
-      - Thai: 			00000000000000000000000001000000, 64
-      - Greek: 			00000000000000000000000010000000, 128
-      - Mediterranean: 	00000000000000000000000100000000, 256
-      - American: 		00000000000000000000001000000000, 512
-      - Middle Eastern: 00000000000000000000010000000000, 1024
-      - Spanish: 		00000000000000000000100000000000, 2048
-      - Korean: 		00000000000000000001000000000000, 4096
-      - Vietnamese: 	00000000000000000010000000000000, 8192
-      - Caribbean: 		00000000000000000100000000000000, 16384
-      - African: 		00000000000000001000000000000000, 32768
-      - Spicy: 			00000000000000010000000000000000, 65536
-      - Sweet: 			00000000000000100000000000000000, 131072
-      - Sour: 			00000000000001000000000000000000, 262144
-      - Salty: 			00000000000010000000000000000000, 524288
-      - Bitter: 		00000000000100000000000000000000, 1048576
-      - Savory: 		00000000001000000000000000000000, 2097152
-      - Creamy: 		00000000010000000000000000000000, 4194304
-      - Crunchy: 		00000000100000000000000000000000, 8388608
-      - Smoky: 			00000001000000000000000000000000, 16777216
-      - Tangy: 			00000010000000000000000000000000, 33554432
-      - Rich: 			00000100000000000000000000000000, 67108864
-      - Refreshing: 	00001000000000000000000000000000, 134217728
-      - Herbaceous: 	00010000000000000000000000000000, 268435456
-      - Cheesy: 		00100000000000000000000000000000, 536870912
-      - Garlicky: 		01000000000000000000000000000000, 1073741824
-      - Fruity: 		10000000000000000000000000000000, 2147483648
+      - Mask: Each tag is assigned a unique bit in the binary representation. 
+              in recipes.tag, 1 in the corresponding bit in the binary mask indicate the recipe has this tag.
+          Ex: mask for a: 010, mask for b:001 tag value: 011. The recipe has both tag a and b.
+      - tags:
+        ```
+          - Chinese: 		    00000000000000000000000000000001, 1
+          - Italian: 		    00000000000000000000000000000010, 2
+          - French: 		    00000000000000000000000000000100, 4
+          - Mexican: 		    00000000000000000000000000001000, 8
+          - Japanese: 	    00000000000000000000000000010000, 16
+          - Indian: 		    00000000000000000000000000100000, 32
+          - Thai: 			    00000000000000000000000001000000, 64
+          - Greek: 			    00000000000000000000000010000000, 128
+          - Mediterranean: 	00000000000000000000000100000000, 256
+          - American: 		  00000000000000000000001000000000, 512
+          - Middle Eastern: 00000000000000000000010000000000, 1024
+          - Spanish: 		    00000000000000000000100000000000, 2048
+          - Korean: 		    00000000000000000001000000000000, 4096
+          - Vietnamese: 	  00000000000000000010000000000000, 8192
+          - Caribbean: 		  00000000000000000100000000000000, 16384
+          - African:        00000000000000001000000000000000, 32768
+          - Spicy: 			    00000000000000010000000000000000, 65536
+          - Sweet:          00000000000000100000000000000000, 131072
+          - Sour: 			    00000000000001000000000000000000, 262144
+          - Salty: 			    00000000000010000000000000000000, 524288
+          - Bitter: 		    00000000000100000000000000000000, 1048576
+          - Savory: 		    00000000001000000000000000000000, 2097152
+          - Creamy: 		    00000000010000000000000000000000, 4194304
+          - Crunchy: 	      00000000100000000000000000000000, 8388608
+          - Smoky: 			    00000001000000000000000000000000, 16777216
+          - Tangy: 			    00000010000000000000000000000000, 33554432
+          - Rich: 			    00000100000000000000000000000000, 67108864
+          - Refreshing: 	  00001000000000000000000000000000, 134217728
+          - Herbaceous: 	  00010000000000000000000000000000, 268435456
+          - Cheesy: 		    00100000000000000000000000000000, 536870912
+          - Garlicky: 		  01000000000000000000000000000000, 1073741824
+          - Fruity: 		    10000000000000000000000000000000, 2147483648
+          ```
 
 Dummy datas:
     Tacos al Pastor (Mexican, Spicy)

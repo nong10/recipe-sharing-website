@@ -28,6 +28,8 @@ include './php/db_config.php';
     <button class="create-button" onclick="window.location.href='create-recipe.php'">
         Create New Recipe
     </button>
+	<br>
+	<br>
 
 	<?php
         // prepare for query to get all saved recipes from recipes table according to all rows with user_id in saves_recipes table

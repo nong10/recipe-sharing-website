@@ -36,7 +36,7 @@ include './php/db_config.php';
         }
     }
     ?>
-
+    <br>
     <form method="POST" action="login.php">
         <label>Username:</label>
         <input type="text" name="username" required>

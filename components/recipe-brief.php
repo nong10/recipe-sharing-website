@@ -21,13 +21,22 @@
         echo "<span class='tag'>$tag</span>";
         echo " ";
       } 
+      /*
+      // debug
+      $tags_values = get_tags_values_with_id($conn, $id);
+      foreach($tags_values as $tag_value) {
+        echo "<span class='tag'>$tag_value</span>";
+        echo " ";
+      }
+      // end debug
+      */
     ?>
     </p>
     <br>
     <?php 
       // display a link to edit-recipes.php with the id of the recipe as button if the page is my-recipes.php
       if ($_SERVER['PHP_SELF'] == "/my-recipes.php") {
-        echo "<a href='edit-recipes.php?id=$id' class='button'>Edit</a>";
+        echo "<a href='edit-recipe.php?id=$id' class='button'>Edit</a>";
         echo " ";
         echo "<button class='button' onclick='deleteRecipe($id)'>Delete</button>";
         echo " ";

@@ -3,6 +3,27 @@ if (!isset($_SESSION['username'])) {
 header("Location: login.php");
 }
 
+    // get all numerical values of tags contained in tag_value
+function get_tags_values($tag_value) {
+    $tags = array();
+    global $mask_lookup;
+    foreach ($mask_lookup as $value => $name) {
+        if ($tag_value & $value) {
+            array_push($tags, $value);
+        }
+    }
+    return $tags;
+}
+
+function get_tags_values_with_id($conn, $id) {
+    // retrieve recipe information
+    $sql = "SELECT * FROM recipes WHERE recipe_id = $id";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $tag_value = $row['tag'];
+    $tags = get_tags_values($tag_value);
+    return $tags;
+}
 
 function get_tags($tag_mask) {
     // get tags from mask value

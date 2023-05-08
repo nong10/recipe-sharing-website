@@ -10,7 +10,7 @@ EOT;
 
 // If logged in, show logout and profile and favorites links
 if ($loggedIn) {
-    $logoutLink = 'logout.php';
+    $logoutLink = 'php/logout.php';
     $logoutFunction = 'confirmLogout()';
     echo <<<EOT
         <a href="$logoutLink" class="nav-link" onclick="$logoutFunction">Logout</a>
@@ -37,7 +37,7 @@ function confirmLogout() {
     console.log("confirmLogout");
     event.preventDefault();
     if (confirm("Are you sure you want to log out?")) {
-        window.location.href = 'logout.php';
+        window.location.href = 'php/logout.php';
     }
 }
 </script>

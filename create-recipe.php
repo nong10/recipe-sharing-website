@@ -7,7 +7,6 @@
 <html lang="en">
 <head>
     <title>Create Recipe</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/create-recipe.css">
 </head>

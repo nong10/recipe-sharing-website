@@ -5,12 +5,14 @@ components/
   - recipe-brief.php
   - recipe-brief.css
 php/
-  - navbar.php
-  - db_config.php
   - add_favourites.php
   - create_recipe_action.php
+  - db_config.php
   - delete_recipe.php
+  - edit_recipe_action.php
   - get_recipe_tags.php
+  - logout.php
+  - navbar.php
   - remove_favourites.php
 css/
   - navbar.css
@@ -24,6 +26,10 @@ logout.php
 signup.php
 profile.php
 recipe-details.php
+create-recipe.php
+favorites.php
+my-recipes.php
+
 ```
 ## Constrains
 - Without logged in, it is impossible to access login-specific pages and will be redirected to login page:

@@ -7,8 +7,16 @@ components/
 php/
   - navbar.php
   - db_config.php
+  - add_favourites.php
+  - create_recipe_action.php
+  - delete_recipe.php
+  - get_recipe_tags.php
+  - remove_favourites.php
 css/
   - navbar.css
+  - main.css
+  - create-recipe.css
+  - recipe-details.css
 js/
 index.php
 login.php
@@ -20,9 +28,21 @@ recipe-details.php
 ## Constrains
 - Without logged in, it is impossible to access login-specific pages and will be redirected to login page:
   - create-recipe.php
-  - 
+  - favorites.php
+  - my-recipes.php
+  - profile.php
+  
+# Run the code
+- database setup:
+  - create a database named `testwebsite1` in mysql and `use testwebsite1`
+  - create a user named `gpt` with credential `gpt`  
+  - grant user `gpt` privilege to database `testwebsite1`
+  - login mysql server with the just created user
+  - run the mysql script `generate-database.sql` to generate tables and dummy data
+- run `php -S localhost:[any port number greater than 8000]`
+- open browser and use `localhost` as url
 
-# Pages
+# Pages & Components
 ## navbar.php
 - this navigation bar is displayed on top of every page
 - Includes the necessary CSS file.
@@ -42,7 +62,7 @@ The navigation bar styling is defined in the `navbar.css` file. The styling incl
   - On hover, setting the background color to #555.
 
 ## recipe-brief.php
-HTML and PHP code for the recipe brief component. Includes the following:
+HTML and PHP code for the recipe brief component. Includes the following:  
 - A div container with the class recipe-brief that contains two child div containers, 
   one for the left part and one for the right part.
   - The left part contains a link to recipe-details.php 
@@ -53,6 +73,8 @@ HTML and PHP code for the recipe brief component. Includes the following:
     - $id: id of the recipe, $name: name of the recipe, $description: recipe description,
       $image: URL of the image.
     - The $id is used to identify the recipe to display if recipe-brief link to 
+- When inside my-recipes.php
+  - display two buttons
 #### recipe-brief styling
 - display property of recipe-brief container to flex, 
   and set the flex-direction to row to split the container horizontally.
@@ -148,38 +170,38 @@ and a button to return to the home page is shown.
           Ex: mask for a: 010, mask for b:001 tag value: 011. The recipe has both tag a and b.
       - tags:
         ```
-          - 00000000000000000000000000000001, 1             Chinese: 		    
-          - 00000000000000000000000000000010, 2             Italian: 		    
-          - 00000000000000000000000000000100, 4             French: 		    
-          - 00000000000000000000000000001000, 8             Mexican: 		    
-          - 00000000000000000000000000010000, 16            Japanese: 	    
-          - 00000000000000000000000000100000, 32            Indian: 		    
-          - 00000000000000000000000001000000, 64            Thai: 			    
-          - 00000000000000000000000010000000, 128           Greek: 			    
-          - 00000000000000000000000100000000, 256           Mediterranean: 	
-          - 00000000000000000000001000000000, 512           American: 		  
-          - 00000000000000000000010000000000, 1024          Middle Eastern: 
-          - 00000000000000000000100000000000, 2048          Spanish: 		    
-          - 00000000000000000001000000000000, 4096          Korean: 		    
-          - 00000000000000000010000000000000, 8192          Vietnamese: 	  
-          - 00000000000000000100000000000000, 16384         Caribbean: 		  
-          - 00000000000000001000000000000000, 32768         African:        
-          - 00000000000000010000000000000000, 65536         Spicy: 			    
-          - 00000000000000100000000000000000, 131072        Sweet:          
-          - 00000000000001000000000000000000, 262144        Sour: 			    
-          - 00000000000010000000000000000000, 524288        Salty: 			    
-          - 00000000000100000000000000000000, 1048576       Bitter: 		    
-          - 00000000001000000000000000000000, 2097152       Savory: 		    
-          - 00000000010000000000000000000000, 4194304       Creamy: 		    
-          - 00000000100000000000000000000000, 8388608       Crunchy: 	      
-          - 00000001000000000000000000000000, 16777216      Smoky: 			    
-          - 00000010000000000000000000000000, 33554432      Tangy: 			    
-          - 00000100000000000000000000000000, 67108864      Rich: 			    
-          - 00001000000000000000000000000000, 134217728     Refreshing: 	  
-          - 00010000000000000000000000000000, 268435456     Herbaceous: 	  
-          - 00100000000000000000000000000000, 536870912     Cheesy: 		    
-          - 01000000000000000000000000000000, 1073741824    Garlicky: 		  
-          - 10000000000000000000000000000000, 2147483648    Fruity: 		    
+          - 00000000000000000000000000000001, 1             Chinese 		    
+          - 00000000000000000000000000000010, 2             Italian 		    
+          - 00000000000000000000000000000100, 4             French 		    
+          - 00000000000000000000000000001000, 8             Mexican 		    
+          - 00000000000000000000000000010000, 16            Japanese 	    
+          - 00000000000000000000000000100000, 32            Indian 		    
+          - 00000000000000000000000001000000, 64            Thai 			    
+          - 00000000000000000000000010000000, 128           Greek 			    
+          - 00000000000000000000000100000000, 256           Mediterranean 	
+          - 00000000000000000000001000000000, 512           American 		  
+          - 00000000000000000000010000000000, 1024          Middle Eastern 
+          - 00000000000000000000100000000000, 2048          Spanish		    
+          - 00000000000000000001000000000000, 4096          Korean 		    
+          - 00000000000000000010000000000000, 8192          Vietnamese 	  
+          - 00000000000000000100000000000000, 16384         Caribbean 		  
+          - 00000000000000001000000000000000, 32768         African        
+          - 00000000000000010000000000000000, 65536         Spicy 			    
+          - 00000000000000100000000000000000, 131072        Sweet          
+          - 00000000000001000000000000000000, 262144        Sour 			    
+          - 00000000000010000000000000000000, 524288        Salty 			    
+          - 00000000000100000000000000000000, 1048576       Bitter 		    
+          - 00000000001000000000000000000000, 2097152       Savory 		    
+          - 00000000010000000000000000000000, 4194304       Creamy 		    
+          - 00000000100000000000000000000000, 8388608       Crunchy 	      
+          - 00000001000000000000000000000000, 16777216      Smoky 			    
+          - 00000010000000000000000000000000, 33554432      Tangy 			    
+          - 00000100000000000000000000000000, 67108864      Rich 			    
+          - 00001000000000000000000000000000, 134217728     Refreshing 	  
+          - 00010000000000000000000000000000, 268435456     Herbaceous 	  
+          - 00100000000000000000000000000000, 536870912     Cheesy 		    
+          - 01000000000000000000000000000000, 1073741824    Garlicky 		  
+          - 10000000000000000000000000000000, 2147483648    Fruity 		    
           ```
 
 Dummy datas:
@@ -231,74 +253,3 @@ Dummy datas:
     Tzatziki (Greek, Herbaceous)
     Falooda (Middle Eastern, Sweet)
 
-
-Display output code in a code block.
-Generate dummy data (use NA for image cell) (one row) for Margherita Pizza (Italian, Cheesy) 
-as a mysql query to insert into recipes table
-using the given information of recipes table and tags table.
-The value of tag should be the sum of all tags that the recipe have.
-Tables:
-
-- `recipes`
-  - Columns: `recipe_id`,`dishname`,`description`,`ingredients`,`steps`,`image`,`tag`
-- image contains the filename of image
-- description, ingredients, descriptions all have upper limit of 2000 characters.
-- ingredients are stored in such format: [{one tsp salt},{two eggs},{1kg flour}]
-- steps are stored in such format: [{step one},{step two},{step three}]
-- tag is a number, refer to tags table for more details
-
-- `tags`
-  - Columns: `tag_id`, `mask_value`, `mask_name`
-- Mask: Each tag is assigned a unique bit in the binary representation. 
-        in recipes.tag, 1 in the corresponding bit in the binary mask indicate the recipe has this tag.
-    Ex: mask for a: 010, mask for b:001 tag value: 011. The recipe has both tag a and b.
-- tags:
-    - Chinese: 		00000000000000000000000000000001, 1
-    - Italian: 		00000000000000000000000000000010, 2
-    - French: 		00000000000000000000000000000100, 4
-    - Mexican: 		00000000000000000000000000001000, 8
-    - Japanese: 	  00000000000000000000000000010000, 16
-    - Indian: 		00000000000000000000000000100000, 32
-    - Thai: 			00000000000000000000000001000000, 64
-    - Greek: 			00000000000000000000000010000000, 128
-    - Mediterranean: 	00000000000000000000000100000000, 256
-    - American: 		00000000000000000000001000000000, 512
-    - Middle Eastern: 00000000000000000000010000000000, 1024
-    - Spanish: 		00000000000000000000100000000000, 2048
-    - Korean: 		00000000000000000001000000000000, 4096
-    - Vietnamese: 	00000000000000000010000000000000, 8192
-    - Caribbean: 		00000000000000000100000000000000, 16384
-    - African: 		00000000000000001000000000000000, 32768
-    - Spicy: 			00000000000000010000000000000000, 65536
-    - Sweet: 			00000000000000100000000000000000, 131072
-    - Sour: 			00000000000001000000000000000000, 262144
-    - Salty: 			00000000000010000000000000000000, 524288
-    - Bitter: 		00000000000100000000000000000000, 1048576
-    - Savory: 		00000000001000000000000000000000, 2097152
-    - Creamy: 		00000000010000000000000000000000, 4194304
-    - Crunchy: 		00000000100000000000000000000000, 8388608
-    - Smoky: 			00000001000000000000000000000000, 16777216
-    - Tangy: 			00000010000000000000000000000000, 33554432
-    - Rich: 			00000100000000000000000000000000, 67108864
-    - Refreshing: 	00001000000000000000000000000000, 134217728
-    - Herbaceous: 	00010000000000000000000000000000, 268435456
-    - Cheesy: 		00100000000000000000000000000000, 536870912
-    - Garlicky: 		01000000000000000000000000000000, 1073741824
-    - Fruity: 		10000000000000000000000000000000, 2147483648
-
-
-
-Given the information of mysql tables:
-- `saves_recipes`
-  - Columns: `saves_recipes_id`, `user_id`, `recipe_id` 
-- `recipes`
-  - Columns: `recipe_id`,`dishname`,`description`,`ingredients`,`steps`,`image`,`tag`
-- image contains the filename of image
-- description, ingredients, descriptions all have upper limit of 2000 characters.
-- ingredients are stored in such format: [{one tsp salt},{two eggs},{1kg flour}]
-- steps are stored in such format: [{step one},{step two},{step three}]
-- tag is a number, refer to tags table for more details
-Note that conn is a mysqli object in db_config.php
-modify the following code so that it get id from $_SESSION['user_id'] and then query all saved
-recipes from the saves_recipes table and display them using the recipe-brief component. Provide code 
-in diff format.

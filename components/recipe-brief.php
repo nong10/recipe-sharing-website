@@ -57,9 +57,9 @@ if (typeof deleteRecipe === 'undefined') {
   function deleteRecipe(id) {
         // get confirmation from user
         var confirmation = confirm("Are you sure you want to delete this recipe?");
-        if (confirmation) {
-              window.location.assign("php/delete_recipe.php?recipe_id=" + id + "&user_id=<?php echo $_SESSION['user_id'] ?>");
-        }  
+          if (confirmation) {
+                window.location.assign("php/delete_recipe.php?recipe_id=" + id + "&user_id=<?php echo $_SESSION['user_id'] ?>");
+          }  
   }
 
 }

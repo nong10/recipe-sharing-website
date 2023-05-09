@@ -84,6 +84,7 @@ if (in_array($fileType, $allowedFileTypes)) {
     $sql = "UPDATE recipes SET image='$newFileName' WHERE recipe_id=$recipe_id";
     $result = $conn->query($sql);
 
+    echo $_SESSION['user_id'];
     // update owns_recipes table
     $sql = "INSERT INTO owns_recipes (user_id, recipe_id) VALUES ('$_SESSION[user_id]', $recipe_id)";
     $result = $conn->query($sql);

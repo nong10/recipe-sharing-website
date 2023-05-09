@@ -1,7 +1,4 @@
 <?php
-if (!isset($_SESSION['username'])) {
-header("Location: login.php");
-}
 
     // get all numerical values of tags contained in tag_value
 function get_tags_values($tag_value) {
